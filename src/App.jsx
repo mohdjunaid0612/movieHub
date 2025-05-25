@@ -13,43 +13,43 @@ const App = () => {
         <div className="text-center my-4 flex flex-wrap">
           <button
             onClick={() => setMoviesList(movies)}
-            className="btn btn-primary mx-2"
+            className="btn btn-primary m-2"
           >
             All
           </button>
           <button
             onClick={() => movieFilter("Action")}
-            className="btn btn-secondary mx-2"
+            className="btn btn-secondary m-2"
           >
             Action
           </button>
           <button
             onClick={() => movieFilter("Thriller")}
-            className="btn btn-warning mx-2"
+            className="btn btn-warning m-2"
           >
             Thriller
           </button>
           <button
             onClick={() => movieFilter("Animation")}
-            className="btn btn-success mx-2"
+            className="btn btn-success m-2"
           >
             Animation
           </button>
           <button
             onClick={() => movieFilter("Drama")}
-            className="btn btn-danger mx-2"
+            className="btn btn-danger m-2"
           >
             Drama
           </button>
           <button
             onClick={() => movieFilter("Horror")}
-            className="btn btn-info mx-2"
+            className="btn btn-info m-2"
           >
             Horror
           </button>
           <button
             onClick={() => movieFilter("Sci-Fi")}
-            className="btn btn-light mx-2"
+            className="btn btn-light m-2"
           >
             Sci-Fi
           </button>
