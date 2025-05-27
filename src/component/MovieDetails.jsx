@@ -46,13 +46,19 @@ const MovieDetails = () => {
         <div className="container mt-3">
           <div className="row">
             <div className="col-lg-4">
-              <img
-                src={`https://image.tmdb.org/t/p/w400/${movie.poster_path}`}
-                alt={movie.title}
-                className="w-100 rounded"
-              />
+              <picture>
+                <source
+                  media="(max-width: 768px)"
+                  srcSet={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
+                />
+                <img
+                  src={`https://image.tmdb.org/t/p/w400/${movie.poster_path}`} // fallback
+                  alt={movie.title}
+                  className="w-100 rounded"
+                />
+              </picture>
             </div>
-            <div className="col-lg-8 ps-lg-5">
+            <div className="col-lg-8 ps-lg-5 pt-lg-0 pt-4">
               <h1>
                 {movie.title}{" "}
                 <span style={{ fontWeight: 400, color: "yellow" }}>
