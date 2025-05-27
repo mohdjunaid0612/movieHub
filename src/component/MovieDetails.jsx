@@ -49,7 +49,7 @@ const MovieDetails = () => {
               <picture>
                 <source
                   media="(max-width: 768px)"
-                  srcSet={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
+                  srcSet={`https://image.tmdb.org/t/p/w300/${movie.backdrop_path}`}
                 />
                 <img
                   src={`https://image.tmdb.org/t/p/w400/${movie.poster_path}`} // fallback
