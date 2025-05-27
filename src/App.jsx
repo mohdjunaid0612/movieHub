@@ -1,11 +1,18 @@
 import React from "react";
 // import Movie from "./component/Movie";
 import Home from "./component/Home";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import MovieDetails from "./component/MovieDetails";
 
 const App = () => {
   return (
     <>
-      <Home />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/movie/:id" element={<MovieDetails />} />
+        </Routes>
+      </Router>
     </>
   );
 };

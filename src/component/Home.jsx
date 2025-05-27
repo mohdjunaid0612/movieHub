@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const api_key = "f10aa479e5ca194f545036149368f781";
 const Home = () => {
@@ -27,15 +28,23 @@ const Home = () => {
           {movies.map((data) => (
             <div className="col-lg-3 col-lg-3 mb-3">
               <div className="p-2 border itemMovie rounded h-100" key={data.id}>
-                <div className="imgBox rounded mb-3 ">
-                  <img
-                    src={`https://image.tmdb.org/t/p/w200/${data.backdrop_path}`}
-                    className="w-100 rounded"
-                  />
-                </div>
-                <h5>{data.title}</h5>
-                <h6 className="text-warning">{data.release_date}</h6>
-                <p className="fw-bold">{data.category}</p>
+                <Link to={`/movie/${data.id}`}>
+                  <div className="imgBox rounded mb-3 ">
+                    <img
+                      src={`https://image.tmdb.org/t/p/w300/${data.backdrop_path}`}
+                      className="w-100 rounded"
+                    />
+                  </div>
+                  <h5>{data.title}</h5>
+                  <h6 className="text-warning">
+                    {new Date(data.release_date).toLocaleDateString("en-GB", {
+                      day: "2-digit",
+                      month: "short",
+                      year: "numeric",
+                    })}
+                  </h6>
+                  <p className="fw-bold">{data.category}</p>
+                </Link>
               </div>
             </div>
           ))}
