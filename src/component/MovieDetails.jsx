@@ -44,7 +44,7 @@ const MovieDetails = () => {
         }}
       >
         <div className="container mt-3">
-          <div className="row">
+          <div className="row align-items-center">
             <div className="col-lg-4">
               <img
                 src={`https://image.tmdb.org/t/p/w400/${movie.poster_path}`}
@@ -87,13 +87,30 @@ const MovieDetails = () => {
                     data-bs-target="#staticBackdrop"
                     className="btn btn-light"
                   >
-                    <Youtube className="text-danger" size={20} /> Play Trailer
+                    <Youtube className="text-danger" size={20} /> Watch Trailer
                   </button>
                   <small className="mt-2 d-block">
                     Trailer from youtube their original youtube channel
                   </small>
                 </div>
               </div>
+              <p className="h5 text-secondary mt-4">
+                <i>Hold on to your coconuts.</i>
+              </p>
+              <p className="mt-3 text-info h6">Overview</p>
+              <p>{movie.overview}</p>
+              <p className="mt-3 h6 text-info">Production</p>
+              <ul className="d-flex ms-0 ps-3 flex-wrap">
+                {movie.production_companies.map((production) => (
+                  <li className="me-5" key={production.id}>
+                    {production.name}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-3 h6 text-info">
+                Revenue (worldwide box office collection)
+              </p>
+              <p>${(movie.revenue / 1_000_000).toFixed(1)} Million USD</p>
             </div>
           </div>
         </div>
