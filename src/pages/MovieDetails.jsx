@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import CircleScore from "./CircleScore";
+import CircleScore from "../component/CircleScore";
 import { Youtube } from "react-bootstrap-icons";
+import Layout from "../layout/Layout";
 
 const api_key = "f10aa479e5ca194f545036149368f781";
 const MovieDetails = () => {
@@ -9,6 +10,7 @@ const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
   const [trailer, setTrailer] = useState(null);
   const [modalKey, setModalKey] = useState(0);
+  const [cast, setCast] = useState([]);
 
   const resetVideo = () => {
     setModalKey((prev) => prev + 1);
@@ -31,14 +33,21 @@ const MovieDetails = () => {
         );
         setTrailer(officialTrailer);
       });
+
+    // for cast
+    fetch(
+      `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${api_key}&language=en-US`
+    )
+      .then((res) => res.json())
+      .then((data) => setCast(data.cast.slice(0, 9)));
   }, [id]);
   if (!movie) {
     return <p>Loading movie details...</p>;
   }
   return (
-    <>
+    <Layout>
       <section
-        className="py-lg-5"
+        className="py-lg-5 movieBanner"
         style={{
           backgroundImage: `url(https://image.tmdb.org/t/p/w1920${movie.backdrop_path})`,
         }}
@@ -95,7 +104,7 @@ const MovieDetails = () => {
                 </div>
               </div>
               <p className="h5 text-secondary mt-4">
-                <i>Hold on to your coconuts.</i>
+                <i>{movie.tagline}</i>
               </p>
               <p className="mt-3 text-info h6">Overview</p>
               <p>{movie.overview}</p>
@@ -110,6 +119,46 @@ const MovieDetails = () => {
               <p className="mt-3 h6 text-info">
                 Revenue (worldwide box office collection)
               </p>
+              <p>${(movie.revenue / 1_000_000).toFixed(1)} Million USD</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="py-lg-5 py-4">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-9">
+              <div className="leftCast">
+                <h3>Top Billed Cast</h3>
+                <div className="castBlock">
+                  {cast.map((actor) => (
+                    <div className="itemCast mb-3 shadow" key={cast.id}>
+                      <div className="itemCastInner">
+                        <img
+                          src={`https://media.themoviedb.org/t/p/w138_and_h175_face${actor.profile_path}`}
+                          alt={actor.name}
+                          className="w-100"
+                        />
+                        <div className="p-2">
+                          <h6 className="text-black">{actor.name}</h6>
+                          <p className="text-secondary">{actor.character}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-3 ps-lg-5">
+              <h5>Status</h5>
+              <p>{movie.status}</p>
+              <h5 className="mt-3">Original Language</h5>
+              <p>{movie.original_language.toUpperCase()}</p>
+              <h5 className="mt-3">Vote Count</h5>
+              <p>{movie.vote_count}</p>
+              <h5 className="mt-3">Budget</h5>
+              <p>${(movie.budget / 1_000_000).toFixed(1)} Million USD</p>
+              <h5 className="mt-3">Revenue</h5>
               <p>${(movie.revenue / 1_000_000).toFixed(1)} Million USD</p>
             </div>
           </div>
@@ -160,7 +209,7 @@ const MovieDetails = () => {
           </div>
         </div>
       </div>
-    </>
+    </Layout>
   );
 };
 

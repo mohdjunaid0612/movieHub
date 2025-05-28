@@ -1,8 +1,8 @@
 import React from "react";
 // import Movie from "./component/Movie";
-import Home from "./component/Home";
+import Home from "./pages/Home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import MovieDetails from "./component/MovieDetails";
+import MovieDetails from "./pages/MovieDetails";
 
 const App = () => {
   return (

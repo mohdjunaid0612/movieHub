@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Layout from "../layout/Layout";
 
 const api_key = "f10aa479e5ca194f545036149368f781";
 const Home = () => {
@@ -21,7 +22,7 @@ const Home = () => {
     });
   }, [page]);
   return (
-    <>
+    <Layout>
       <div className="container">
         <h3 className="text-warning text-center my-4 ">Latest Movies</h3>
         <div className="row">
@@ -65,7 +66,7 @@ const Home = () => {
           </button>
         </div>
       </div>
-    </>
+    </Layout>
   );
 };
 
