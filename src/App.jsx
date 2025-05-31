@@ -1,18 +1,20 @@
 import React from "react";
 // import Movie from "./component/Movie";
 import Home from "./pages/Home";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MovieDetails from "./pages/MovieDetails";
+import SearchResult from "./component/SearchResult";
 
 const App = () => {
   return (
     <>
-      <Router>
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/movie/:id" element={<MovieDetails />} />
+          <Route path="/search/:query" element={<SearchResult />} />
         </Routes>
-      </Router>
+      </BrowserRouter>
     </>
   );
 };
