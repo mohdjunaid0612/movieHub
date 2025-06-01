@@ -27,12 +27,7 @@ const SearchResult = () => {
     };
     fetchSearchResult();
   }, [query]);
-  if (loading)
-    return (
-      <div className="w-100 h-100 position-absolute top-50 start-50 translate-middle">
-        <p>Loading...</p>
-      </div>
-    );
+  if (loading) return <Loader />;
   return (
     <Layout>
       <section className="py-lg-5 py-4">
