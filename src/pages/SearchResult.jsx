@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Layout from "../layout/Layout";
 import { Link } from "react-router-dom";
+import Loader from "../component/Loader";
 const api_key = "f10aa479e5ca194f545036149368f781";
 const SearchResult = () => {
   const { query } = useParams();
