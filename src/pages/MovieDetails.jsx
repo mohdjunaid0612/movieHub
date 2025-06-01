@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import CircleScore from "../component/CircleScore";
 import { Youtube } from "react-bootstrap-icons";
 import Layout from "../layout/Layout";
@@ -145,30 +145,37 @@ const MovieDetails = () => {
                 <div className="castBlock">
                   {cast.map((actor) => (
                     <div className="itemCast mb-3 shadow" key={cast.id}>
-                      <div className="itemCastInner">
-                        {!actor.profile_path ? (
-                          <div className="emptyProfile">
-                            <i className="fa fa-user"></i>
+                      <Link
+                        to={`https://en.wikipedia.org/wiki/${encodeURIComponent(
+                          actor.name
+                        )}`}
+                        target="_blank"
+                      >
+                        <div className="itemCastInner">
+                          {!actor.profile_path ? (
+                            <div className="emptyProfile">
+                              <i className="fa fa-user"></i>
+                            </div>
+                          ) : (
+                            <>
+                              <img
+                                src={`https://media.themoviedb.org/t/p/w138_and_h175_face${actor.profile_path}`}
+                                alt={actor.name}
+                                className="w-100 d-none d-md-block"
+                              />
+                              <img
+                                src={`https://media.themoviedb.org/t/p/w138_and_h175_face${actor.profile_path}`}
+                                alt={actor.name}
+                                className="w-100 d-block d-md-none"
+                              />
+                            </>
+                          )}
+                          <div className="p-2">
+                            <h6 className="text-black">{actor.name}</h6>
+                            <p className="text-secondary">{actor.character}</p>
                           </div>
-                        ) : (
-                          <>
-                            <img
-                              src={`https://media.themoviedb.org/t/p/w138_and_h175_face${actor.profile_path}`}
-                              alt={actor.name}
-                              className="w-100 d-none d-md-block"
-                            />
-                            <img
-                              src={`https://media.themoviedb.org/t/p/w138_and_h175_face${actor.profile_path}`}
-                              alt={actor.name}
-                              className="w-100 d-block d-md-none"
-                            />
-                          </>
-                        )}
-                        <div className="p-2">
-                          <h6 className="text-black">{actor.name}</h6>
-                          <p className="text-secondary">{actor.character}</p>
                         </div>
-                      </div>
+                      </Link>
                     </div>
                   ))}
                 </div>
