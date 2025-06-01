@@ -27,7 +27,12 @@ const SearchResult = () => {
     };
     fetchSearchResult();
   }, [query]);
-  if (loading) return <p>Loading...</p>;
+  if (loading)
+    return (
+      <div className="w-100 h-100 position-absolute top-50 start-50 translate-middle">
+        <p>Loading...</p>
+      </div>
+    );
   return (
     <Layout>
       <section className="py-lg-5 py-4">
@@ -36,20 +41,31 @@ const SearchResult = () => {
           {results.length > 0 ? (
             results.map((movie) => (
               <div
-                className="itemResult mt-3 border p-3 rounded"
+                className="itemResult mt-3 border p-lg-3 p-2 rounded"
                 key={movie.id}
               >
                 <Link to={`/movie/${movie.id}`}>
                   <div className="row">
                     <div className="col-lg-2">
+                      {!movie.backdrop_path ? (
+                        <div className="emptyImg">
+                          <i className="fa fa-image"></i>
+                        </div>
+                      ) : (
+                        <img
+                          src={`https://image.tmdb.org/t/p/w400/${movie.backdrop_path}`}
+                          alt={movie.title}
+                          className="w-100 rounded d-block d-md-none"
+                        />
+                      )}
                       <img
                         src={`https://image.tmdb.org/t/p/w400/${movie.poster_path}`}
                         alt={movie.title}
-                        className="w-100 rounded"
+                        className="w-100 rounded d-none d-md-block"
                       />
                     </div>
                     <div className="col-lg-10 text-white">
-                      <h3>{movie.title}</h3>
+                      <h3 className="mt-3 mt-md-0">{movie.title}</h3>
                       <p className="fw-bold mt-3">
                         Release Date:{" "}
                         {new Date(movie.release_date).toLocaleDateString(

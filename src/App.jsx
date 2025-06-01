@@ -3,7 +3,7 @@ import React from "react";
 import Home from "./pages/Home";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MovieDetails from "./pages/MovieDetails";
-import SearchResult from "./component/SearchResult";
+import SearchResult from "./pages/SearchResult";
 
 const App = () => {
   return (

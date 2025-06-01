@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import CircleScore from "../component/CircleScore";
 import { Youtube } from "react-bootstrap-icons";
 import Layout from "../layout/Layout";
+import Loader from "../component/Loader";
 
 const api_key = "f10aa479e5ca194f545036149368f781";
 const MovieDetails = () => {
@@ -42,7 +43,7 @@ const MovieDetails = () => {
       .then((data) => setCast(data.cast.slice(0, 9)));
   }, [id]);
   if (!movie) {
-    return <p>Loading movie details...</p>;
+    return <Loader />;
   }
   return (
     <Layout>
@@ -58,8 +59,19 @@ const MovieDetails = () => {
               <img
                 src={`https://image.tmdb.org/t/p/w400/${movie.poster_path}`}
                 alt={movie.title}
-                className="w-100 rounded"
+                className="w-100 rounded d-none d-md-block"
               />
+              {!movie.backdrop_path ? (
+                <div className="emptyImg">
+                  <i className="fa fa-image"></i>
+                </div>
+              ) : (
+                <img
+                  src={`https://image.tmdb.org/t/p/w400/${movie.backdrop_path}`}
+                  alt={movie.title}
+                  className="w-100 rounded d-block d-md-none"
+                />
+              )}
             </div>
             <div className="col-lg-8 ps-lg-5 pt-lg-0 pt-4">
               <h1>
@@ -134,11 +146,24 @@ const MovieDetails = () => {
                   {cast.map((actor) => (
                     <div className="itemCast mb-3 shadow" key={cast.id}>
                       <div className="itemCastInner">
-                        <img
-                          src={`https://media.themoviedb.org/t/p/w138_and_h175_face${actor.profile_path}`}
-                          alt={actor.name}
-                          className="w-100"
-                        />
+                        {!actor.profile_path ? (
+                          <div className="emptyProfile">
+                            <i className="fa fa-user"></i>
+                          </div>
+                        ) : (
+                          <>
+                            <img
+                              src={`https://media.themoviedb.org/t/p/w138_and_h175_face${actor.profile_path}`}
+                              alt={actor.name}
+                              className="w-100 d-none d-md-block"
+                            />
+                            <img
+                              src={`https://media.themoviedb.org/t/p/w138_and_h175_face${actor.profile_path}`}
+                              alt={actor.name}
+                              className="w-100 d-block d-md-none"
+                            />
+                          </>
+                        )}
                         <div className="p-2">
                           <h6 className="text-black">{actor.name}</h6>
                           <p className="text-secondary">{actor.character}</p>
@@ -149,7 +174,7 @@ const MovieDetails = () => {
                 </div>
               </div>
             </div>
-            <div className="col-lg-3 ps-lg-5">
+            <div className="col-lg-3 ps-lg-5 mt-md- mt-4">
               <h5>Status</h5>
               <p>{movie.status}</p>
               <h5 className="mt-3">Original Language</h5>
