@@ -43,22 +43,37 @@ const SearchResult = () => {
                 <Link to={`/movie/${movie.id}`}>
                   <div className="row">
                     <div className="col-lg-2">
-                      {!movie.backdrop_path ? (
-                        <div className="emptyImg">
-                          <i className="fa fa-image"></i>
+                      {!movie.poster_path ? (
+                        <div className="d-none d-lg-block">
+                          <div className="emptyImg">
+                            <i className="fa fa-image"></i>
+                          </div>
                         </div>
                       ) : (
-                        <img
-                          src={`https://image.tmdb.org/t/p/w400/${movie.backdrop_path}`}
-                          alt={movie.title}
-                          className="w-100 rounded d-block d-md-none"
-                        />
+                        <div className="d-none d-lg-block">
+                          <img
+                            src={`https://image.tmdb.org/t/p/w400/${movie.poster_path}`}
+                            alt={movie.title}
+                            className="w-100 rounded"
+                          />
+                        </div>
                       )}
-                      <img
-                        src={`https://image.tmdb.org/t/p/w400/${movie.poster_path}`}
-                        alt={movie.title}
-                        className="w-100 rounded d-none d-md-block"
-                      />
+
+                      {!movie.backdrop_path ? (
+                        <div className="d-block d-lg-none">
+                          <div className="emptyImg">
+                            <i className="fa fa-image"></i>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="d-block d-lg-none">
+                          <img
+                            src={`https://image.tmdb.org/t/p/w400/${movie.backdrop_path}`}
+                            alt={movie.title}
+                            className="w-100 rounded"
+                          />
+                        </div>
+                      )}
                     </div>
                     <div className="col-lg-10 text-white">
                       <h3 className="mt-3 mt-md-0">{movie.title}</h3>
