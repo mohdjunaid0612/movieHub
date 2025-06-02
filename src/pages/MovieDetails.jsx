@@ -56,21 +56,35 @@ const MovieDetails = () => {
         <div className="container mt-3">
           <div className="row align-items-center">
             <div className="col-lg-4">
-              <img
-                src={`https://image.tmdb.org/t/p/w400/${movie.poster_path}`}
-                alt={movie.title}
-                className="w-100 rounded d-none d-md-block"
-              />
-              {!movie.backdrop_path ? (
-                <div className="emptyImg">
-                  <i className="fa fa-image"></i>
+              {!movie.poster_path ? (
+                <div className="d-none d-md-block">
+                  <div className="emptyImg">
+                    <i className="fa fa-image"></i>
+                  </div>
                 </div>
               ) : (
-                <img
-                  src={`https://image.tmdb.org/t/p/w400/${movie.backdrop_path}`}
-                  alt={movie.title}
-                  className="w-100 rounded d-block d-md-none"
-                />
+                <div className="d-none d-md-block">
+                  <img
+                    src={`https://image.tmdb.org/t/p/w400/${movie.poster_path}`}
+                    alt={movie.title}
+                    className="w-100 rounded"
+                  />
+                </div>
+              )}
+              {!movie.backdrop_path ? (
+                <div className="d-block d-lg-none">
+                  <div className="emptyImg">
+                    <i className="fa fa-image"></i>
+                  </div>
+                </div>
+              ) : (
+                <div className="d-block d-md-none">
+                  <img
+                    src={`https://image.tmdb.org/t/p/w400/${movie.backdrop_path}`}
+                    alt={movie.title}
+                    className="w-100 rounded"
+                  />
+                </div>
               )}
             </div>
             <div className="col-lg-8 ps-lg-5 pt-lg-0 pt-4">
